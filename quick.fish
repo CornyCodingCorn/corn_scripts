@@ -1,8 +1,9 @@
 #!/bin/fish
 
-set PROJECT_DIR $HOME/Storage/projects
+set PROJECT_DIR $HOME/Storage/Projects
 set SCRIPT_DIR $PROJECT_DIR/scripts
 set SCRIPT_CONFIG $SCRIPT_DIR/config.yaml
+set ENGINE_DIR $HOME/Storage/godot-engines
 
 function echo_err -a message
 	echo "[Error  ]: $message" 1>2&
@@ -26,6 +27,10 @@ function switch_directory -a name
 			set directory $PROJECT_DIR/cpp-game
 		case s script
 			set directory $PROJECT_DIR/scripts
+		case h hypr
+			set directory $HOME/.config/hypr
+		case e engine
+			set directory $ENGINE_DIR
 		case "*"
 			echo_err "not a supported value ($name)"
 			return 1
@@ -40,15 +45,6 @@ function switch_directory -a name
     echo $directory
 end
 
-function open_nvim -a name
-	set directory $(switch_directory $name)
-	if [ $status -ne 0 ]
-		return $status
-	end
-
-	nvim $directory
-end
-
 function open_folder -a name
 	set directory $(switch_directory $name)
 	if [ $status -ne 0 ]
@@ -56,6 +52,17 @@ function open_folder -a name
 	end
 	
 	cd $directory
+end
+
+
+function open_nvim -a name
+	open_folder $name
+	if [ $status -ne 0 ]
+		return $status
+	end
+
+	command nvim .
+	cd -
 end
 
 function quick
