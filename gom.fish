@@ -50,7 +50,7 @@ function build_godot -a build_type
 	cd -
 end
 
-function open_godot_editor
+function select_editor
 	set -l versions ""
 	for binary in (find $ENGINE_BIN_DIR/* -type f)
 		if test -n "$versions"
@@ -61,6 +61,11 @@ function open_godot_editor
 	end
 
 	set -l selected_editor $ENGINE_BIN_DIR/(echo $versions | fzf)
+	echo $selected_editor
+end
+
+function open_godot_editor
+	set -l selected_editor (select_editor)
 	set -l log_file $ENGINE_LOG_DIR/(date +"%Y-%m-%d_%H:%M")
 	try_create_dir $ENGINE_LOG_DIR
 
@@ -69,6 +74,15 @@ function open_godot_editor
 	echo "" >> $log_file
 
 	fish -c "$selected_editor &>> $log_file" & disown
+end
+
+function export_godot_api -a path
+	set -l selected_editor (select_editor)
+
+	cd $path
+	command $selected_editor --dump-gdextension-interface
+	command $selected_editor --dump-extension-api
+	cd -
 end
 
 function clear_log
@@ -84,8 +98,9 @@ end
 function gom
     argparse \
         'b/build_godot=?' \
-        o/open_godot_editor \
         c/clear_log \
+        o/open_godot_editor \
+        e/export_godot_api= \
         -- $argv
 
     if set -q _flag_build_godot
@@ -98,6 +113,10 @@ function gom
 
 	if set -q _flag_open_godot_editor
 		open_godot_editor
+	end
+
+	if set -q _flag_export_godot_api
+		export_godot_api $_flag_export_godot_api
 	end
 
 end
