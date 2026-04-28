@@ -48,6 +48,11 @@ function switch_directory -a name
         return 1
     end
 
+	if not test -e $SCRIPT_CONFIG
+		echo "Hi"
+		touch $SCRIPT_CONFIG
+	end
+
     command yq -iy "$YAML_OPTION = \"$directory\"" $SCRIPT_CONFIG
     echo $directory
 end
