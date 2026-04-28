@@ -10,7 +10,7 @@ set ENGINE_LOG_DIR $SCRIPT_DIR/gom.logs
 
 function build_godot -a build_type
 	cd $ENGINE_SRC_DIR
-	rm -ri bin/godot*
+	rm -ri bin/*.editor.*
 
 	set -l selected_branch (git branch -a | grep -e "remotes/origin/*" | fzf)
 	set selected_branch (basename -- $selected_branch)
@@ -21,7 +21,7 @@ function build_godot -a build_type
 	git switch $selected_branch
 	git pull
 
-	set -l scons_args "platform=linuxbsd use_llvm=yes"
+	set -l scons_args platform=linuxbsd use_llvm=yes
 	set -l build_type_name ""
 	switch $build_type
 		case "*" debug d
@@ -41,7 +41,7 @@ function build_godot -a build_type
 
 	scons $scons_args
 
-	for binary in (find bin/* -type f)
+	for binary in bin/*.editor.*
 		mv $binary $ENGINE_BIN_DIR/$selected_branch
 	end
 
@@ -51,7 +51,11 @@ end
 function open_godot_editor
 	set -l versions ""
 	for binary in (find $ENGINE_BIN_DIR/* -type f)
-		set versions $versions\n(basename -- $binary)
+		if test -n "$versions"
+			set versions $versions\n
+		end
+
+		set versions $versions(basename -- $binary)
 	end
 
 	set -l selected_editor $ENGINE_BIN_DIR/(echo $versions | fzf)

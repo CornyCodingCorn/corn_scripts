@@ -31,3 +31,8 @@
 [ Log clear_log ] : Removing logs in /home/cornpc/Storage/Projects/scripts/gom.logs
 [ Log build_godot ] : building [debug] godot editor version [4.6]
 [ Error switch_directory ] : not a supported value (i)
+[ Log build_godot ] : building [debug] godot editor version [4.6]
+[ Log build_godot ] : building [debug] godot editor version [4.6]
+[ Log build_godot ] : building [debug] godot editor version [4.6]
+[ Log build_godot ] : building [debug] godot editor version [4.6]
+[ Log build_godot ] : building [debug] godot editor version [4.6]
