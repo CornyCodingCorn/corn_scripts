@@ -1,0 +1,33 @@
+[ Error ] : empty directory
+[ Error ] : empty directory
+[ Error switch_directory ] : empty directory
+[ Log switch_directory ] : rogue_vampire
+[ Log switch_directory ] : /home/cornpc/Storage/Projects/games/rogue_vampire
+[ Error switch_directory ] : not a supported value ()
+[ Error switch_directory ] : not a supported value ()
+[ Error switch_directory ] : not a supported value ()
+[ Error switch_directory ] : not a supported value ()
+[ Error switch_directory ] : not a supported value ()
+[ Error switch_directory ] : not a supported value ()
+[ Error switch_directory ] : not a supported value ()
+[ Error switch_directory ] : not a supported value ()
+[ Error switch_directory ] : not a supported value ()
+[ Error switch_directory ] : not a supported value ()
+[ Error switch_directory ] : not a supported value ()
+[ Error switch_directory ] : not a supported value ()
+[ Error switch_directory ] : not a supported value ()
+[ Error switch_directory ] : not a supported value (t)
+[ Error switch_directory ] : not a supported value (t)
+[ Error switch_directory ] : not a supported value (t)
+[ Log build_godot ] : building [debug] godot editor
+[ Log build_godot ] : building [debug] godot editor
+[ Log build_godot ] : building [debug] godot editor
+[ Log build_godot ] : building [debug] godot editor
+[ Log build_godot ] : building [debug] godot editor
+[ Log build_godot ] : building [debug] godot editor
+[ Log build_godot ] : building [debug] godot editor
+[ Log build_godot ] : building [debug] godot editor version [master]
+[ Log build_godot ] : building [debug] godot editor version [master]
+[ Log clear_log ] : Removing logs in /home/cornpc/Storage/Projects/scripts/gom.logs
+[ Log build_godot ] : building [debug] godot editor version [4.6]
+[ Error switch_directory ] : not a supported value (i)
