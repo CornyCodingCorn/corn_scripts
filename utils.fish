@@ -15,3 +15,19 @@ function log -a name message type
     echo $message >> $SCRIPT_DIR/log.txt
 	echo $message
 end
+
+function try_create_dir -a name
+	if test -d $name
+		return
+	end
+
+	command mkdir -p $name
+end
+
+function try_create_file -a name
+	if test -f $name
+		return
+	end
+
+	touch $name
+end

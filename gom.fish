@@ -10,7 +10,9 @@ set ENGINE_LOG_DIR $SCRIPT_DIR/gom.logs
 
 function build_godot -a build_type
 	cd $ENGINE_SRC_DIR
-	rm -ri bin/*.editor.*
+	if test -e bin/*.editor.*
+		rm -rI bin/*.editor.*
+	end
 
 	set -l selected_branch (git branch -a | grep -e "remotes/origin/*" | fzf)
 	set selected_branch (basename -- $selected_branch)
@@ -60,6 +62,7 @@ function open_godot_editor
 
 	set -l selected_editor $ENGINE_BIN_DIR/(echo $versions | fzf)
 	set -l log_file $ENGINE_LOG_DIR/(date +"%Y-%m-%d_%H:%M")
+	try_create_dir $ENGINE_LOG_DIR
 
 	echo "Opening version $selected_editor" > $log_file
 	echo "=================================================================" >> $log_file
@@ -69,8 +72,13 @@ function open_godot_editor
 end
 
 function clear_log
+	try_create_dir $ENGINE_LOG_DIR
 	log "clear_log" "Removing logs in $ENGINE_LOG_DIR"
-	rm -rI $ENGINE_LOG_DIR/*
+	if test -e $ENGINE_LOG_DIR/*
+		rm -rI $ENGINE_LOG_DIR/*
+	else
+		echo "There is nothing to clear"
+	end
 end
 
 function gom
