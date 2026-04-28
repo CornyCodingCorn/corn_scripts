@@ -68,7 +68,7 @@ function open_godot_editor
 	echo "=================================================================" >> $log_file
 	echo "" >> $log_file
 
-	fish -c "$selected_editor &>> $log_file" &
+	fish -c "$selected_editor &>> $log_file" & disown
 end
 
 function clear_log
